@@ -1,12 +1,22 @@
 const User = require('../models/user');
 
+// POST method
+const addUser = async (req, res) => {
+	const user = new User({
+		name: req.body.name,
+		creationDate: req.body.creationDate,
+	});
+
+	try {
+		const newUser = await user.save();
+		res.status(201).json(newUser);
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
+};
 // GET method
 const getUser = (req, res) => {
 	res.send('User Found!');
-};
-// POST method
-const addUser = (req, res) => {
-	res.send('User Created!');
 };
 // PUT method
 const updateUser = (req, res) => {
@@ -29,15 +39,15 @@ const getAllUsers = async (req, res) => {
 async function findUserById(req, res, next) {
 	try {
 		user = await User.findById(req.params.id);
-    if (user === null) {
-      res.status(404).json({ message: 'User not found'});
-    }
+		if (user === null) {
+			res.status(404).json({ message: 'User not found' });
+		}
 	} catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+		res.status(500).json({ message: err.message });
+	}
 
-  res.user = user;
-  next();
+	res.user = user;
+	next();
 }
 
 module.exports = {
@@ -46,5 +56,5 @@ module.exports = {
 	updateUser,
 	removeUser,
 	getAllUsers,
-  findUserById
+	findUserById,
 };
