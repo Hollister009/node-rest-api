@@ -17,14 +17,34 @@ const removeUser = (req, res) => {
 	res.send('User Deleted!');
 };
 // GET method
-const getUsers = (req, res) => {
-	res.json([]);
+const getAllUsers = async (req, res) => {
+	try {
+		const users = await User.find();
+		res.json(users);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
 };
+
+async function findUserById(req, res, next) {
+	try {
+		user = await User.findById(req.params.id);
+    if (user === null) {
+      res.status(404).json({ message: 'User not found'});
+    }
+	} catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+
+  res.user = user;
+  next();
+}
 
 module.exports = {
 	getUser,
 	addUser,
 	updateUser,
 	removeUser,
-	getUsers,
+	getAllUsers,
+  findUserById
 };
