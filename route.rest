@@ -1,9 +1,23 @@
 GET http://localhost:3000/users
 
 ###
-POST http://localhost:3000/user
+GET http://localhost:3000/users/5d5fb95bf7d8d767100b8897
+
+###
+POST http://localhost:3000/users
 Content-Type: application/json
 
 {
   "name": "Ricardo"
 }
+
+###
+PUT http://localhost:3000/users/5d5fb95bf7d8d767100b54c1
+Content-Type: application/json
+
+{
+  "name": "Tommy"
+}
+
+###
+DELETE http://localhost:3000/users/5d5fb95bf7d8d767100b54c1
