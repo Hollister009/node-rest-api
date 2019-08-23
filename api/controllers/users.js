@@ -1,30 +1,74 @@
 const User = require('../models/user');
 
+// POST method
+const addUser = async (req, res) => {
+  const user = new User({
+    name: req.body.name,
+    creationDate: req.body.creationDate,
+  });
+
+  try {
+    const newUser = await user.save();
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 // GET method
 const getUser = (req, res) => {
-	res.send('User Found!');
-};
-// POST method
-const addUser = (req, res) => {
-	res.send('User Created!');
+  res.json(res.user);
 };
 // PUT method
-const updateUser = (req, res) => {
-	res.send('User Updated!');
+const updateUser = async (req, res) => {
+  if (req.body.name !== null || undefined) {
+    res.user.name = req.body.name;
+  }
+
+  try {
+    const updatedUser = await res.user.save();
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 // DELETE method
-const removeUser = (req, res) => {
-	res.send('User Deleted!');
+const removeUser = async (req, res) => {
+  try {
+    const deletedUser = await res.user.remove();
+    res.status(200).json(deletedUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 // GET method
-const getUsers = (req, res) => {
-	res.json([]);
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
+async function findUserById(req, res, next) {
+  try {
+    user = await User.findById(req.params.id);
+    if (user === null) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+
+  res.user = user;
+  next();
+}
+
 module.exports = {
-	getUser,
-	addUser,
-	updateUser,
-	removeUser,
-	getUsers,
+  getUser,
+  addUser,
+  updateUser,
+  removeUser,
+  getAllUsers,
+  findUserById,
 };
