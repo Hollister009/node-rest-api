@@ -3,11 +3,11 @@ const router = express.Router();
 const homePage = require('./controllers');
 const usersController = require('./controllers/users');
 
-
+// Default page
 router.get('/', homePage);
 
 // user CRUD operations
-router.post('/user/', usersController.addUser);
+router.post('/user', usersController.addUser);
 
 router.get('/user/:id', usersController.getUser);
 
