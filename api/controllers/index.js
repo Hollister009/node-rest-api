@@ -1,7 +1,7 @@
 const path = require('path');
 
 const homePage = (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/index.html'));
+  res.sendFile(path.resolve('views/index.html'));
 }
 
 module.exports = homePage;
