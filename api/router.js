@@ -4,20 +4,26 @@ const usersController = require('./controllers/users');
 const { findUserById } = usersController;
 
 // Home page
-router.get('/', (req, res) => res.render('index'));
+router.get('/', (req, res) => {
+  res.render('index', { title: 'Home Page' });
+});
 
 // Users page
-router.get('/users', (req, res) => res.render('users'));
+router.get('/users', (req, res) => {
+  res.render('users', { title: 'Users page' });
+});
 
 // Files page
-router.get('/files', (req, res) => res.render('files'));
+router.get('/files', (req, res) => {
+  res.render('files', { title: 'Files page' });
+});
 
 // user CRUD operations
-router.route('api/users')
+router.route('/api/users')
   .get(usersController.getAllUsers)
-  .post(usersController.addUser)
+  .post(usersController.addUser);
 
-router.route('api/users/:id')
+router.route('/api/users/:id')
   .get(findUserById, usersController.getUser)
   .put(findUserById, usersController.updateUser)
   .delete(findUserById, usersController.removeUser);
