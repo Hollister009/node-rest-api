@@ -1,5 +1,12 @@
-extends content.pug
+extends _includes/layout.pug
 
+block content
+  include _includes/header.pug
+  main
+    section.container.users
+    button#add-user add user
+    button#fetch-users fetch users
+  include _includes/footer.pug
 block script
   script(src="vendors/axios.min.js")
-  script(src="js/script.js")
+  script(src="js/users.js")
