@@ -1,10 +1,10 @@
-GET http://localhost:3000/users
+GET http://localhost:3000/api/users
 
 ###
-GET http://localhost:3000/users/5d5fb95bf7d8d767100b8897
+GET http://localhost:3000/api/users/${id}
 
 ###
-POST http://localhost:3000/users
+POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/users/5d5fb95bf7d8d767100b54c1
+PUT http://localhost:3000/api/users/${id}
 Content-Type: application/json
 
 {
@@ -20,4 +20,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/users/5d5fb95bf7d8d767100b54c1
+DELETE http://localhost:3000/api/users/${id}

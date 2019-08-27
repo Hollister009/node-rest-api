@@ -28,9 +28,7 @@ const loggerTool = (req, res, next) => {
 };
 
 // Set view-engine
-app
-  .set('views', path.resolve('views'))
-  .set('view engine', 'pug');
+app.set('view engine', 'pug');
 
 // Config server
 app
