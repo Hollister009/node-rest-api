@@ -7,7 +7,6 @@ require('dotenv').config();
 
 const app = express();
 const router = require('./api/router');
-const rootPath = path.resolve('api');
 const port = process.env.PORT || 3000;
 const db_uri = process.env.MONGODB_URI;
 
@@ -33,7 +32,7 @@ app.set('view engine', 'pug');
 // Config server
 app
   .use(express.json())
-  .use(express.static(rootPath))
+  .use(express.static(path.resolve('public')))
   .use(loggerTool)
   .use(router);
 
