@@ -27,7 +27,12 @@ const loggerTool = (req, res, next) => {
   next();
 };
 
-//Request Parsing
+// Set view-engine
+app
+  .set('views', path.resolve('views'))
+  .set('view engine', 'pug');
+
+// Config server
 app
   .use(express.json())
   .use(express.static(rootPath))

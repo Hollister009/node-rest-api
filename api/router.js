@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const homePage = require('./controllers');
 const usersController = require('./controllers/users');
 
 const { findUserById } = usersController;
 
 // Default page
-router.get('/', homePage);
+router.get('/', (req, res) => res.render('index'));
 
 // user CRUD operations
 router.post('/users', usersController.addUser);
