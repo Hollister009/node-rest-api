@@ -2,8 +2,8 @@
 function init() {
   var userList = [];
   // global selectors
-  var fetchBtn = document.querySelector('#fetch-users');
   var addBtn = document.querySelector('#add-user');
+  var fetchBtn = document.querySelector('#fetch-users');
   var usersSection = document.querySelector('section.users');
 
   function createElement(tag, className) {
@@ -82,26 +82,42 @@ function init() {
     }
   }
 
+  function normalizeName(name) {
+    return name.slice(0, 1).toUpperCase() + name.slice(1).toLowerCase();
+  }
+
+  function createNewUser() {
+    var userName = prompt('Please enter username below:', '');
+
+    if (userName !== null && userName.length > 1) {
+      axios({
+        method: 'POST',
+        url: window.location.origin + '/api/users',
+        headers: { 'content-type': 'application/json' },
+        data: { name: normalizeName(userName) },
+      })
+        .then(res => console.log(`User ${res.data.name} created.`))
+        .then(() => fetchUsers())
+        .catch(err => console.log(err));
+    } else {
+      alert('Invalid name, try again!');
+    }
+  }
+
   function getUser(el) {
     var userName = el.dataset.name;
     return findUserByName(userList, userName);
   }
 
-  function normalizeName(name) {
-    return name.slice(0, 1).toUpperCase() + name.slice(1).toLowerCase();
-  }
-
   function updateUser(user) {
-    var url = window.location.origin + '/api/users/' + user._id;
-    var newName = prompt('Enter new name:(name should be longer than 1 symbol)', '');
+    var newName = prompt('Enter new name:(should be longer than 1 symbol)', '');
 
     if (newName !== null && newName.length > 1) {
       axios({
-        method: 'put',
-        url: url,
-        data: {
-          name: normalizeName(newName),
-        },
+        method: 'PUT',
+        url: window.location.origin + '/api/users/' + user._id,
+        headers: { 'content-type': 'application/json' },
+        data: { name: normalizeName(newName) },
       })
         .then(res => console.log(res.data))
         .then(() => fetchUsers())
@@ -112,13 +128,11 @@ function init() {
   }
 
   function deleteUser(user) {
-    var url = window.location.origin + '/api/users/' + user._id;
-
     axios({
-      method: 'delete',
-      url: url
+      method: 'DELETE',
+      url: window.location.origin + '/api/users/' + user._id,
     })
-      .then(res => console.log(`User ${res.data.name} deleted`))
+      .then(res => console.log(`User ${res.data.name} deleted.`))
       .then(() => fetchUsers())
       .catch(err => console.log(err));
   }
@@ -128,6 +142,7 @@ function init() {
     return user;
   }
 
+  addBtn.addEventListener('click', createNewUser);
   fetchBtn.addEventListener('click', fetchUsers);
 }
 
