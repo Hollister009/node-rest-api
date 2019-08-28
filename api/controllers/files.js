@@ -7,16 +7,14 @@ const getFileList = (req, res) => {
     if (!fs.existsSync(storage)) {
       fs.mkdirSync(storage);
     }
-  } catch (err) {
-    console.error(err);
-  }
 
-  fs.readdir(storage, (err, files) => {
-    if (err) {
-      res.status(404).json({ message: err.message });
-    }
-    res.json({ files });
-  });
+    fs.readdir(storage, (err, files) => {
+      res.json({ files });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: err.message });
+  }
 };
 
 module.exports = {
