@@ -16,16 +16,16 @@ const addUser = async (req, res) => {
 };
 // GET method
 const getUser = (req, res) => {
-  res.json(res.user);
+  res.json(req.user);
 };
 // PUT method
 const updateUser = async (req, res) => {
   if (req.body.name !== null || undefined) {
-    res.user.name = req.body.name;
+    req.user.name = req.body.name;
   }
 
   try {
-    const updatedUser = await res.user.save();
+    const updatedUser = await req.user.save();
     res.status(200).json(updatedUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -34,7 +34,7 @@ const updateUser = async (req, res) => {
 // DELETE method
 const removeUser = async (req, res) => {
   try {
-    const deletedUser = await res.user.remove();
+    const deletedUser = await req.user.remove();
     res.status(200).json(deletedUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -60,7 +60,7 @@ async function findUserById(req, res, next) {
     return res.status(500).json({ message: err.message });
   }
 
-  res.user = user;
+  req.user = user;
   next();
 }
 
