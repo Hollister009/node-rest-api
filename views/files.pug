@@ -1,2 +1,10 @@
-extends content.pug
+extends _includes/layout.pug
 
+block content
+  include _includes/header.pug
+  main
+    section.container.files
+      p.message load files
+    button#get-files get files
+  include _includes/footer.pug
+block script

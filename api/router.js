@@ -11,12 +11,12 @@ router.get('/', (req, res) => {
 
 // Users page
 router.get('/users', (req, res) => {
-  res.render('users', { title: 'Users page' });
+  res.render('users');
 });
 
 // Files page
 router.get('/files', (req, res) => {
-  res.render('files', { title: 'Files page' });
+  res.render('files');
 });
 
 // user CRUD operations
