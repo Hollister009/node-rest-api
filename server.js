@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -31,7 +32,9 @@ app.set('view engine', 'pug');
 
 // Config server
 app
+  .use(cors())
   .use(express.json())
+  .use(express.urlencoded({extended:false}))
   .use(express.static(path.resolve('public')))
   .use(loggerTool)
   .use(router);
