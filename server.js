@@ -41,7 +41,7 @@ app.use(
 // Config server
 app
   .use(express.json())
-  .use('/public', express.static(publicDir))
+  .use(express.static(publicDir))
   .use(loggerTool)
   .use(router);
 

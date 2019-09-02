@@ -1,0 +1,48 @@
+.footer {
+  position: relative;
+  top: 100%;
+}
+
+.hero {
+  background-color: rgb(68, 0, 204);
+  background-image: linear-gradient(rgb(28, 210, 242), rgb(68, 0, 204));
+  color: $white;
+}
+
+.table {
+  width: 100%;
+}
+
+.container {
+  padding-top: 80px;
+  max-width: 1200px;
+}
+
+.users, .files {
+  width: 900px;
+
+  .message {
+    background: transparent;
+  }
+}
+
+.title-alt {
+  color: $white;
+}
+
+.notification {
+  background-color: rgba(#f5f5f5, .5);
+
+  .controls {
+    padding-top: 20px;
+  }
+}
+
+
+button {
+  margin-right: 5px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

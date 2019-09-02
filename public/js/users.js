@@ -7,15 +7,9 @@ function init() {
   var fetchBtn = document.querySelector('#fetch-users');
   var usersSection = document.querySelector('section.users');
 
-  function createElement(tag, className) {
-    var element = document.createElement(tag);
-    if (className) element.classList.add(className);
-    return element;
-  }
-
   function renderTable(list) {
     usersSection.innerHTML = '';
-    var table = createElement('table');
+    var table = createElement('table', 'table is-striped');
     var tbody = '<tbody>';
     tbody += '<tr><th>users:</th><th>actions:</th></tr>';
 

@@ -2,6 +2,7 @@ extends _includes/layout.pug
 
 block content
   include _includes/header.pug
-  main
-    h1 Welcome to the #{title}
+  main.hero.is-fullheight
+    .container
+      h1.title.title-alt Welcome to the #{title}
   include _includes/footer.pug

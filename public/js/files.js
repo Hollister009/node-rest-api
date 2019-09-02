@@ -6,15 +6,9 @@ function init() {
   var getBtn = document.querySelector('#get-files');
   var filesSection = document.querySelector('section.files');
 
-  function createElement(tag, className) {
-    var element = document.createElement(tag);
-    if (className) element.classList.add(className);
-    return element;
-  }
-
   function renderTable(list) {
     filesSection.innerHTML = '';
-    var table = createElement('table');
+    var table = createElement('table', 'table is-striped');
     var tbody = '<tbody>';
     tbody += '<tr><th>files:</th></tr>';
 
@@ -31,7 +25,7 @@ function init() {
   function renderFileRow(file) {
     return `
       <tr>
-        <td><span class="file-name">${file}</span></td>
+        <td class="file-item">${file}</td>
       </tr>
     `;
   }

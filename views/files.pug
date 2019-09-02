@@ -2,10 +2,13 @@ extends _includes/layout.pug
 
 block content
   include _includes/header.pug
-  main
-    section.container.files
-      p.message load files
-    button#get-files get files
+  main.hero.is-fullheight
+    .container
+      article.notification.tile.is-parent.is-vertical
+        section.files
+          p.title load files
+        .controls
+          button#get-files.button.is-info get files
   include _includes/footer.pug
 block script
   script(src="vendors/axios.min.js")
