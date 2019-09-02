@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
+const sassMiddleware = require('node-sass-middleware');
 
 require('dotenv').config();
 
@@ -26,13 +27,21 @@ const loggerTool = (req, res, next) => {
   next();
 };
 
+const publicDir = path.resolve('public');
 // Set view-engine
 app.set('view engine', 'pug');
-
+app.use(
+  sassMiddleware({
+    src: publicDir,
+    dest: publicDir,
+    indentedSyntax: false, // true = .sass and false = .scss
+    sourceMap: true,
+  }),
+);
 // Config server
 app
   .use(express.json())
-  .use(express.static(path.resolve('public')))
+  .use('/public', express.static(publicDir))
   .use(loggerTool)
   .use(router);
 
