@@ -17,6 +17,31 @@ const getFileList = (req, res) => {
   }
 };
 
+const uplaodFile = (req, res) => {
+  res.send('File uplaoded');
+};
+
+const selectFile = (req, res) => {
+  res.send('File selected');
+};
+
+const createFile = (req, res) => {
+  res.send('File created');
+};
+
+const updateFile = (req, res) => {
+  res.send('File updated');
+};
+
+const deleteFile = (req, res) => {
+  res.send('File deleted');
+};
+
 module.exports = {
   getFileList,
+  uplaodFile,
+  selectFile,
+  createFile,
+  updateFile,
+  deleteFile,
 };

@@ -62,3 +62,10 @@ typings/
 
 # DS_Store
 .DS_Store
+
+# Storage directory
+storage/
+
+# Compiled styles
+*.css
+*.css.map

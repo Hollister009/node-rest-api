@@ -1,20 +1,15 @@
+'use strict';
 // Init users module
 function init() {
-  var userList = [];
+  var userList;
   // global selectors
   var addBtn = document.querySelector('#add-user');
   var fetchBtn = document.querySelector('#fetch-users');
   var usersSection = document.querySelector('section.users');
 
-  function createElement(tag, className) {
-    var element = document.createElement(tag);
-    if (className) element.classList.add(className);
-    return element;
-  }
-
   function renderTable(list) {
     usersSection.innerHTML = '';
-    var table = createElement('table');
+    var table = createElement('table', 'table is-striped');
     var tbody = '<tbody>';
     tbody += '<tr><th>users:</th><th>actions:</th></tr>';
 
@@ -49,10 +44,10 @@ function init() {
   }
 
   function updateList(data) {
-    userList.length = 0;
+    userList = [];
 
     if (data.length > 0) {
-      userList.push.apply(userList, data);
+      [].push.apply(userList, data);
       renderTable(data);
     } else {
       renderMessage();
