@@ -1,6 +1,7 @@
+'use strict';
 // Init users module
 function init() {
-  var userList = [];
+  var userList;
   // global selectors
   var addBtn = document.querySelector('#add-user');
   var fetchBtn = document.querySelector('#fetch-users');
@@ -49,10 +50,10 @@ function init() {
   }
 
   function updateList(data) {
-    userList.length = 0;
+    userList = [];
 
     if (data.length > 0) {
-      userList.push.apply(userList, data);
+      [].push.apply(userList, data);
       renderTable(data);
     } else {
       renderMessage();
