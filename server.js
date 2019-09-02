@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const sassMiddleware = require('node-sass-middleware');
@@ -40,9 +41,24 @@ app.use(
 );
 // Config server
 app
+  .use(cors())
   .use(express.json())
   .use(express.static(publicDir))
+  .use(express.urlencoded({extended:false}))
   .use(loggerTool)
   .use(router);
+
+// Error handling
+app.use((req, res, next) => {
+  const error = new Error('Not found');
+  error.status = 404;
+  next(error);
+})
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500).json({
+    message: error.message
+  });
+})
 
 app.listen(port, () => console.log(`Server is running on port: ${port}`));
